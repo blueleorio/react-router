@@ -7,6 +7,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import JobCard from "./components/JobCard"; // Update the import statement
 import Box from "@mui/system/Box";
+import { Outlet } from "react-router-dom";
 
 export default function App() {
   const darkTheme = createTheme({
@@ -59,6 +60,7 @@ export default function App() {
             ))}
           </Grid>
         </Box>
+        <Outlet />
         <Pagination
           count={Math.ceil(jobData.length / jobsPerPage)}
           page={currentPage}
