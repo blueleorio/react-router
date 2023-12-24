@@ -21,7 +21,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/jobs.json"); // Assuming it's in the public folder
+        const response = await fetch("/jobs.json");
         const data = await response.json();
         setJobData(data);
       } catch (error) {
