@@ -1,7 +1,7 @@
 import React from "react";
-
+import Form from "../components/Form";
 function InvoicesPage() {
-  return <div>InvoicesPage</div>;
+  return <Form />;
 }
 
 export default InvoicesPage;

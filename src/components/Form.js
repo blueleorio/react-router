@@ -7,7 +7,12 @@ const Form = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: "belukotu@gmail.com",
+      username: "ShibaInuXJiroRamen",
+    },
+  });
   const onSubmit = (values) => console.log(values);
 
   return (
