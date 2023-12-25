@@ -1,7 +1,7 @@
 import React from "react";
-
+import TestFormMUI from "../components/TestFormMUI";
 function ExpensesPage() {
-  return <div>ExpensesPage</div>;
+  return <TestFormMUI />;
 }
 
 export default ExpensesPage;
