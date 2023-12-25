@@ -9,8 +9,8 @@ const Form = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: "belukotu@gmail.com",
-      username: "ShibaInuXJiroRamen",
+      email: "belukotu@shibainu.com",
+      password: "ThanhDepTrai",
     },
   });
   const onSubmit = (values) => console.log(values);
@@ -18,31 +18,36 @@ const Form = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        Email:{" "}
+        <label htmlFor="email">email</label>
         <input
-          type="email"
+          id="email"
           {...register("email", {
-            required: "Required",
+            required: "required",
             pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "invalid email address",
+              value: /\S+@\S+\.\S+/,
+              message: "Entered value does not match email format",
             },
           })}
+          type="email"
         />
       </div>
-      {errors.email && errors.email.message}
-
+      {errors.email && <span role="alert">{errors.email.message}</span>}
       <div>
-        Username:{" "}
+        <label htmlFor="password">password</label>
         <input
-          {...register("username", {
-            validate: (value) => value !== "admin" || "Nice try!",
+          id="password"
+          {...register("password", {
+            required: "required",
+            minLength: {
+              value: 5,
+              message: "min length is 5",
+            },
           })}
+          type="password"
         />
       </div>
-      {errors.username && errors.username.message}
-
-      <button type="submit">Submit</button>
+      {errors.password && <span role="alert">{errors.password.message}</span>}
+      <button type="submit">SUBMIT</button>
     </form>
   );
 };
