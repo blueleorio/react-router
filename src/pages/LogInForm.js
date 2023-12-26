@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-function LogInPage() {
+function LogInForm() {
   const {
     handleSubmit,
     register,
@@ -86,4 +86,4 @@ function LogInPage() {
   );
 }
 
-export default LogInPage;
+export default LogInForm;

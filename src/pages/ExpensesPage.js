@@ -1,7 +1,7 @@
 import React from "react";
-import LogInPage from "../pages/LogInPage";
+import LogInForm from "../pages/LogInForm";
 function ExpensesPage() {
-  return <LogInPage />;
+  return <LogInForm />;
 }
 
 export default ExpensesPage;

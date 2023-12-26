@@ -1,9 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import LogInPage from "../pages/LogInPage";
+import LogInForm from "../pages/LogInForm";
 const style = {
   position: "absolute",
   top: "50%",
@@ -31,7 +30,7 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <LogInPage />
+          <LogInForm />
         </Box>
       </Modal>
     </div>
