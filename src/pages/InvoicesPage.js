@@ -1,7 +1,7 @@
 import React from "react";
-import Form from "../components/Form";
+import LogInModal from "../components/LogInModal";
 function InvoicesPage() {
-  return <Form />;
+  return <LogInModal />;
 }
 
 export default InvoicesPage;

@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ExpensesPage from "./pages/ExpensesPage";
 import InvoicesPage from "./pages/InvoicesPage";
+import TestPage from "./pages/TestPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,6 +15,8 @@ root.render(
         <Route path="/" element={<App />}>
           <Route path="expenses" element={<ExpensesPage />} />
           <Route path="invoices" element={<InvoicesPage />} />
+          <Route path="test" element={<TestPage />} />
+
           <Route
             path="*"
             element={
