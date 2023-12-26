@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Stack, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Input from "@mui/material/Input";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
 function LogInPage() {
   const {
     handleSubmit,
@@ -13,6 +17,9 @@ function LogInPage() {
       password: "ThanhDepTrai",
     },
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
   const onSubmit = (values) => console.log(values);
 
@@ -37,7 +44,8 @@ function LogInPage() {
 
           <TextField
             label="password"
-            type="password"
+            // type="password"
+            type={showPassword ? "text" : "password"}
             {...register("password", {
               required: "required",
               minLength: {
@@ -45,6 +53,20 @@ function LogInPage() {
                 message: "min length is 5",
               },
             })}
+            // TODO: Add toggle hide/show password here from MUI
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             error={!!errors.password}
             helperText={errors.password?.message}
           />
