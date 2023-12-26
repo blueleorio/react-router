@@ -23,8 +23,10 @@ function LogInPage() {
     },
   });
   const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
-  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const handleClickShowPassword = () =>
+    setShowPassword((showPassword) => !showPassword);
+  const handleMouseDownPassword = () =>
+    setShowPassword((showPassword) => !showPassword);
 
   const onSubmit = (values) => console.log(values);
 

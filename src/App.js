@@ -21,7 +21,7 @@ export default function App() {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/jobs.json");
+        const response = await fetch("http://localhost:4000/jobs");
         const data = await response.json();
         setJobData(data);
       } catch (error) {
@@ -43,6 +43,7 @@ export default function App() {
     setCurrentPage(value);
   };
   return (
+    // TODO: need to re-organize link route and layout, your 1-page app look sucks ass, man
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <SearchAppBar title="Job Searching" />
