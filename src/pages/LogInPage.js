@@ -32,7 +32,7 @@ function LogInPage() {
 
   return (
     <Box>
-      <h1>Log IN</h1>
+      <h1>Log In</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2}>
           <TextField
