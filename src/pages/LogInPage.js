@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { Button, Stack, TextField } from "@mui/material";
+import {
+  Button,
+  Stack,
+  TextField,
+  IconButton,
+  InputAdornment,
+  Box,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Input from "@mui/material/Input";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
+
 function LogInPage() {
   const {
     handleSubmit,
@@ -24,10 +29,10 @@ function LogInPage() {
   const onSubmit = (values) => console.log(values);
 
   return (
-    <>
+    <Box>
       <h1>Log IN</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={2} width={400}>
+        <Stack spacing={2}>
           <TextField
             label="email"
             type="email"
@@ -44,7 +49,6 @@ function LogInPage() {
 
           <TextField
             label="password"
-            // type="password"
             type={showPassword ? "text" : "password"}
             {...register("password", {
               required: "required",
@@ -76,7 +80,7 @@ function LogInPage() {
           </Button>
         </Stack>
       </form>
-    </>
+    </Box>
   );
 }
 
