@@ -1,7 +1,7 @@
 import React from "react";
-import TestFormMUI from "../components/TestFormMUI";
+import LogInPage from "../pages/LogInPage";
 function ExpensesPage() {
-  return <TestFormMUI />;
+  return <LogInPage />;
 }
 
 export default ExpensesPage;
