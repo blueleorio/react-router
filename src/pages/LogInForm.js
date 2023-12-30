@@ -1,30 +1,22 @@
 import React, { useState } from "react";
 import {
-  Button,
   Stack,
-  TextField,
   IconButton,
   InputAdornment,
   Box,
   Typography,
   Alert,
-  FormControlLabel,
-  Checkbox,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useForm, Controller } from "react-hook-form";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-// import FormProvider from "../components/form/FormProvider";
-// import FTextField from "../components/form/FTextField";
-// import FCheckBox from "../components/form/FCheckBox";
+import { FormProvider } from "../components/form/FormProvider";
+import { FTextField } from "../components/form/FTextField";
+import { FCheckBox } from "../components/form/FCheckBox";
 
-import {
-  FormProvider,
-  FTextField,
-  FCheckBox,
-} from "./components/form/index.js";
+// import { FormProvider, FTextField, FCheckBox } from ".index.js";
 
 function LogInForm() {
   const defaultValues = {
