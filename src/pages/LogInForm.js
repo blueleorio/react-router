@@ -8,7 +8,7 @@ import {
   Alert,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
@@ -27,10 +27,7 @@ function LogInForm() {
   const methods = useForm({ defaultValues });
   const {
     handleSubmit,
-    register,
-    reset,
     setError,
-    control,
     formState: { errors, isSubmitting },
   } = methods;
   const [showPassword, setShowPassword] = useState(false);
