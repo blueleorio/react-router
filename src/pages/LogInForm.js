@@ -12,6 +12,9 @@ import { useForm } from "react-hook-form";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 import { FormProvider } from "../components/form/FormProvider";
 import { FTextField } from "../components/form/FTextField";
 import { FCheckBox } from "../components/form/FCheckBox";
@@ -25,7 +28,17 @@ function LogInForm() {
     password: "ThanhDepTrai",
     remember: true,
   };
-  const methods = useForm({ defaultValues });
+  const schema = yup
+    .object()
+    .shape({
+      email: yup.string().email().required(),
+    })
+    .required();
+  const methods = useForm({
+    resolver: yupResolver(schema),
+    defaultValues,
+  });
+
   const {
     handleSubmit,
     setError,
@@ -38,7 +51,7 @@ function LogInForm() {
 
   const onSubmit = (values) => {
     console.log(values);
-    setError("afterSubmit", { message: "Server response Error" });
+    // setError("afterSubmit", { message: "Server response Error" });
   };
 
   return (
