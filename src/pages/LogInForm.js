@@ -16,6 +16,7 @@ import { FormProvider } from "../components/form/FormProvider";
 import { FTextField } from "../components/form/FTextField";
 import { FCheckBox } from "../components/form/FCheckBox";
 
+// TODO: Compact syntax later when refactoring code
 // import { FormProvider, FTextField, FCheckBox } from ".index.js";
 
 function LogInForm() {
