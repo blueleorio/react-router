@@ -8,7 +8,7 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import { fakeAuthProvider } from "./components/auth";
+import { fakeAuthProvider } from "../auth";
 
 export default function LogInModal() {
   return (
@@ -35,18 +35,7 @@ export default function LogInModal() {
       </p>
 
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<PublicPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="/protected"
-            element={
-              <RequireAuth>
-                <ProtectedPage />
-              </RequireAuth>
-            }
-          />
-        </Route>
+        <Route path="/*" element={<Layout />} />
       </Routes>
     </AuthProvider>
   );
