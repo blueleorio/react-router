@@ -41,7 +41,7 @@ function LogInForm() {
 
   const {
     handleSubmit,
-    setError,
+    // setError,
     formState: { errors, isSubmitting },
   } = methods;
   const [showPassword, setShowPassword] = useState(false);
