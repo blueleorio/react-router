@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/system/Box";
 import Chip from "@mui/material/Chip";
+
 const JobCard = ({ job }) => {
   return (
     <Card
