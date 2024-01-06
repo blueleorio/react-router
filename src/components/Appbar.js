@@ -10,6 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import BasicModal from "./BasicModal";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -55,6 +56,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar({ title }) {
+  // State to manage the modal
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  // Function to handle opening the modal
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -87,11 +96,12 @@ export default function SearchAppBar({ title }) {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <Button color="inherit" variant="contained">
+          <Button onClick={handleOpenModal} color="inherit" variant="contained">
             Login
           </Button>
         </Toolbar>
       </AppBar>
+      {isModalOpen && <BasicModal onClose={() => setIsModalOpen(false)} />}
     </Box>
   );
 }

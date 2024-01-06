@@ -14,12 +14,18 @@ export default function App() {
   const auth = useAuth;
   const state = location.state;
   return (
-    <Routes>
+    <Routes
+      location={
+        location.state?.backgroundLocation
+          ? location.state.backgroundLocation
+          : location
+      }
+    >
       <Route element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
         <Route path="expenses" element={<ExpensesPage />} />
         <Route path="invoices" element={<InvoicesPage />} />
         <Route path="test" element={<TestPage />} />
-        <Route path="/" element={<HomePage />} />
       </Route>
       <Route
         path="*"
