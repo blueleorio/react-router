@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import LogInForm from "../pages/LogInForm";
+import LogInForm from "./LogInForm";
 const style = {
   position: "absolute",
   top: "50%",

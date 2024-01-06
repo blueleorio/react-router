@@ -101,6 +101,7 @@ export default function SearchAppBar({ title }) {
           </Button>
         </Toolbar>
       </AppBar>
+      {/* Need to revisit this logic later, have no idea why chatGPT suggest this */}
       {isModalOpen && <BasicModal onClose={() => setIsModalOpen(false)} />}
     </Box>
   );

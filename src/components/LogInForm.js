@@ -15,9 +15,9 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { FormProvider } from "../components/form/FormProvider";
-import { FTextField } from "../components/form/FTextField";
-import { FCheckBox } from "../components/form/FCheckBox";
+import { FormProvider } from "./form/FormProvider";
+import { FTextField } from "./form/FTextField";
+import { FCheckBox } from "./form/FCheckBox";
 
 // TODO: Compact syntax later when refactoring code
 // import { FormProvider, FTextField, FCheckBox } from ".index.js";
