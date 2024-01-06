@@ -19,6 +19,7 @@ import { FormProvider } from "./form/FormProvider";
 import { FTextField } from "./form/FTextField";
 import { FCheckBox } from "./form/FCheckBox";
 
+import { useAuth, AuthProvider } from "../auth/AuthContext";
 // TODO: Compact syntax later when refactoring code
 // import { FormProvider, FTextField, FCheckBox } from ".index.js";
 
@@ -32,6 +33,8 @@ function LogInForm() {
     .object()
     .shape({
       email: yup.string().email().required(),
+      password: yup.string().required(),
+      remember: yup.boolean(),
     })
     .required();
   const methods = useForm({
@@ -41,10 +44,10 @@ function LogInForm() {
 
   const {
     handleSubmit,
-    // setError,
     formState: { errors, isSubmitting },
   } = methods;
   const [showPassword, setShowPassword] = useState(false);
+  const auth = useAuth();
   const handleClickShowPassword = () =>
     setShowPassword((showPassword) => !showPassword);
   const handleMouseDownPassword = (e) => e.preventDefault();
@@ -52,6 +55,12 @@ function LogInForm() {
   const onSubmit = (values) => {
     console.log(values);
     // setError("afterSubmit", { message: "Server response Error" });
+  };
+
+  const handleLogin = () => {
+    auth.signin(defaultValues.email, () => {
+      console.log("Success Log IN, wtf it is");
+    });
   };
 
   return (
@@ -72,6 +81,13 @@ function LogInForm() {
             label="password"
             type={showPassword ? "text" : "password"}
             fullWidth
+            rules={{
+              required: "Password is required",
+              minLength: {
+                value: 5,
+                message: "Minimum length is 5",
+              },
+            }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -101,6 +117,7 @@ function LogInForm() {
             type="submit"
             variant="contained"
             color="primary"
+            onClick={handleLogin}
             loading={isSubmitting}
           >
             Log In

@@ -11,6 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import BasicModal from "./BasicModal";
+import { useAuth } from "../auth/AuthContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -64,6 +65,9 @@ export default function SearchAppBar({ title }) {
     setIsModalOpen(true);
   };
 
+  // Access user information from AuthContext
+  const auth = useAuth();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -96,9 +100,30 @@ export default function SearchAppBar({ title }) {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <Button onClick={handleOpenModal} color="inherit" variant="contained">
-            Login
-          </Button>
+          {auth.user ? (
+            <>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Welcome, {auth.user}!
+              </Typography>
+              <Button
+                onClick={() => {
+                  auth.signout(() => setIsModalOpen(false));
+                }}
+                color="inherit"
+                variant="contained"
+              >
+                Sign out
+              </Button>
+            </>
+          ) : (
+            <Button
+              onClick={handleOpenModal} // Set up onClick to open the modal
+              color="inherit"
+              variant="contained"
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       {/* Need to revisit this logic later, have no idea why chatGPT suggest this */}

@@ -1,7 +1,7 @@
 import React from "react";
-import BasicModal from "../components/BasicModal";
+
 function TestPage() {
-  return <BasicModal />;
+  return <div>Test Page</div>;
 }
 
 export default TestPage;

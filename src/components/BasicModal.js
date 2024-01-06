@@ -1,8 +1,9 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import LogInForm from "./LogInForm";
+import { useAuth } from "../auth/AuthContext";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -19,7 +20,15 @@ export default function BasicModal({ onClose }) {
   // const [open, setOpen] = React.useState(false);
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
+  const auth = useAuth(); // Access the authentication context
 
+  // Function to handle form submission
+  const handleLogin = (username) => {
+    // Call the signin method to update the authentication state
+    auth.signin(username, () => {
+      // Close the modal after successful login
+      onClose();
+    });
   return (
     <div>
       <Modal
@@ -29,7 +38,7 @@ export default function BasicModal({ onClose }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <LogInForm />
+          <LogInForm onLogin={handleLogin}/>
         </Box>
       </Modal>
     </div>
