@@ -1,14 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import ExpensesPage from "./pages/ExpensesPage";
 import { InvoicesPage } from "./pages/InvoicesPage";
 import TestPage from "./pages/TestPage";
 import { Layout } from "./layouts/Layout";
 import HomePage from "./pages/HomePage";
+import { useAuth, RequireAuth } from "./auth/AuthContext";
 
 export default function App() {
+  const location = useLocation();
+  const auth = useAuth;
+  const state = location.state;
   return (
     <Routes>
       <Route element={<Layout />}>
