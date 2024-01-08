@@ -1,8 +1,11 @@
+// BasicModal.js
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import LogInForm from "../pages/LogInForm";
+import LogInForm from "./LogInForm";
+import { useAuth } from "../auth/AuthContext";
+import { useNavigate, useLocation } from "react-router-dom";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -15,22 +18,34 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function BasicModal({ onClose }) {
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Function to handle form submission
+  const handleLogin = (username) => {
+    // Call the signin method to update the authentication state
+
+    auth.signin(username, () => {
+      console.log("User has logged in:", auth.user);
+      // Close the modal after successful login
+      onClose();
+      navigate(location.state?.backgroundLocation || "/");
+    });
+  };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={true}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <LogInForm />
+          {/* Pass the handleLogin function to the LogInForm */}
+          <LogInForm onLogin={handleLogin} />
         </Box>
       </Modal>
     </div>

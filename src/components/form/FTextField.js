@@ -1,9 +1,8 @@
 import { useFormContext, Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 
-function FTextField({ name, ...other }) {
+export const FTextField = ({ name, ...other }) => {
   const { control } = useFormContext();
-
   return (
     <Controller
       name={name}
@@ -19,6 +18,4 @@ function FTextField({ name, ...other }) {
       )}
     />
   );
-}
-
-export default FTextField;
+};

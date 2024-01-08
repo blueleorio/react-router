@@ -9,7 +9,8 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import BasicModal from "./BasicModal";
+import { useAuth } from "../auth/AuthContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -55,6 +56,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar({ title }) {
+  // State to manage the modal
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  // Function to handle opening the modal
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Access user information from AuthContext
+  const auth = useAuth();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -76,8 +88,8 @@ export default function SearchAppBar({ title }) {
           >
             {title}
           </Typography>
-          <Link to="/invoices">Invoices</Link> |{" "}
-          <Link to="/expenses">Expenses</Link> | <Link to="/test">Test</Link>
+          {/* <Link to="/invoices">Invoices</Link> |{" "}
+          <Link to="/expenses">Expenses</Link> | <Link to="/test">Test</Link> */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -87,11 +99,34 @@ export default function SearchAppBar({ title }) {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          <Button color="inherit" variant="contained">
-            Login
-          </Button>
+          {auth.user ? (
+            <>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Welcome, {auth.user}!
+              </Typography>
+              <Button
+                onClick={() => {
+                  auth.signout(() => setIsModalOpen(false));
+                }}
+                color="inherit"
+                variant="contained"
+              >
+                Sign out
+              </Button>
+            </>
+          ) : (
+            <Button
+              onClick={handleOpenModal} // Set up onClick to open the modal
+              color="inherit"
+              variant="contained"
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
+      {/* TODO: Need to revisit this logic later, have no idea why chatGPT suggest this */}
+      {isModalOpen && <BasicModal onClose={() => setIsModalOpen(false)} />}
     </Box>
   );
 }

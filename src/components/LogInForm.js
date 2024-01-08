@@ -1,48 +1,58 @@
+// LogInForm.js
 import React, { useState } from "react";
 import {
-  Button,
   Stack,
-  TextField,
   IconButton,
   InputAdornment,
   Box,
   Typography,
   Alert,
-  FormControlLabel,
-  Checkbox,
 } from "@mui/material";
-
 import LoadingButton from "@mui/lab/LoadingButton";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import FormProvider from "../components/form/FormProvider";
-import FTextField from "../components/form/FTextField";
-import FCheckBox from "../components/form/FCheckBox";
 
-function LogInForm() {
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+import { FormProvider } from "./form/FormProvider";
+import { FTextField } from "./form/FTextField";
+import { FCheckBox } from "./form/FCheckBox";
+
+function LogInForm({ onLogin }) {
   const defaultValues = {
     email: "belukotu@shibainu.com",
     password: "ThanhDepTrai",
     remember: true,
   };
-  const methods = useForm({ defaultValues });
+  const schema = yup
+    .object()
+    .shape({
+      email: yup.string().email().required(),
+      password: yup.string().required(),
+    })
+    .required();
+  const methods = useForm({
+    resolver: yupResolver(schema),
+    defaultValues,
+  });
+
   const {
     handleSubmit,
-    register,
-    reset,
-    setError,
-    control,
     formState: { errors, isSubmitting },
   } = methods;
   const [showPassword, setShowPassword] = useState(false);
+
   const handleClickShowPassword = () =>
     setShowPassword((showPassword) => !showPassword);
+
   const handleMouseDownPassword = (e) => e.preventDefault();
 
   const onSubmit = (values) => {
+    // Call the onLogin function with the provided email (username)
+    onLogin(values.email);
     console.log(values);
-    setError("afterSubmit", { message: "Server response Error" });
   };
 
   return (
@@ -56,11 +66,10 @@ function LogInForm() {
           {!!errors.afterSubmit && (
             <Alert severity="error">{errors.afterSubmit.message}</Alert>
           )}
-          <FTextField name="email" label="email address" />
-
+          <FTextField name="email" label="Email address" />
           <FTextField
             name="password"
-            label="password"
+            label="Password"
             type={showPassword ? "text" : "password"}
             fullWidth
             InputProps={{
@@ -77,14 +86,13 @@ function LogInForm() {
               ),
             }}
           />
-
           <Stack
             direction="row"
             alignItems="center"
             justifyContent="space-between"
             sx={{ my: 2 }}
           >
-            <FCheckBox name="remember" label="remember my ass" />
+            <FCheckBox name="remember" label="Remember me" />
           </Stack>
           <LoadingButton
             fullWidth
@@ -103,20 +111,3 @@ function LogInForm() {
 }
 
 export default LogInForm;
-
-// type="email"
-// {...register("email", {
-//   required: "required",
-//   pattern: {
-//     value: /\S+@\S+\.\S+/,
-//     message: "Entered value does not match email format",
-//   },
-// })}
-
-// {...register("password", {
-//   required: "required",
-//   minLength: {
-//     value: 5,
-//     message: "min length is 5",
-//   },
-// })}

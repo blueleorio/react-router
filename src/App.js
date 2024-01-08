@@ -1,75 +1,51 @@
-// import "./App.css";
 import React from "react";
-import SearchAppBar from "./components/Appbar";
-import Container from "@mui/material/Container";
-import { Pagination, Grid } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import JobCard from "./components/JobCard"; // Update the import statement
-import Box from "@mui/system/Box";
-import { Outlet } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useAuth, RequireAuth } from "./auth/AuthContext";
+
+import ExpensesPage from "./pages/ExpensesPage";
+import { InvoicesPage } from "./pages/InvoicesPage";
+import TestPage from "./pages/TestPage";
+import HomePage from "./pages/HomePage";
+import { Layout } from "./layouts/Layout";
+import BasicModal from "./components/BasicModal"; // Import your login modal component
+import JobDetailModal from "./components/JobDetailModal";
 
 export default function App() {
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
+  const location = useLocation();
+  const auth = useAuth(); // Ensure to call useAuth as a function
+  const state = location.state;
 
-  const [jobData, setJobData] = React.useState([]);
-
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/jobs");
-        const data = await response.json();
-        setJobData(data);
-      } catch (error) {
-        console.error("Error fetching job data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const jobsPerPage = 5;
-  const [currentPage, setCurrentPage] = React.useState(1);
-
-  const indexOfLastJob = currentPage * jobsPerPage;
-  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const currentJobs = jobData.slice(indexOfFirstJob, indexOfLastJob);
-
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
   return (
-    // TODO: need to re-organize link route and layout, your 1-page app look sucks ass, man
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <SearchAppBar title="Job Searching" />
-      <Container
-        maxWidth="lg"
-        className="container"
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    <>
+      <Routes
+        location={
+          location.state?.backgroundLocation
+            ? location.state.backgroundLocation
+            : location
+        }
       >
-        <Box mt={3} width="100%">
-          <Grid container spacing={3}>
-            {currentJobs.map((job) => (
-              <Grid key={job.id} item xs={12} sm={6} md={4}>
-                <JobCard job={job} />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-        <Outlet />
-        <Pagination
-          count={Math.ceil(jobData.length / jobsPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
-          variant="outlined"
-          color="primary"
-        />
-      </Container>
-    </ThemeProvider>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+
+          <Route
+            path="*"
+            element={
+              <main>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
+        </Route>
+      </Routes>
+      {state && auth.user ? (
+        <Routes>
+          <Route path="/job/:id" element={<JobDetailModal />}></Route>
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/job/:id" element={<BasicModal />}></Route>
+        </Routes>
+      )}
+    </>
   );
 }
