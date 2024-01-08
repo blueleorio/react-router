@@ -4,6 +4,10 @@ import { useLocation } from "react-router-dom";
 
 const Auth = createContext(null);
 
+// UseAuth - to call the context
+const useAuth = () => {
+  return useContext(Auth);
+};
 // I still dont know what this does! need to revisit UseContext tutorial
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -25,11 +29,6 @@ const AuthProvider = ({ children }) => {
   const value = { user, signin, signout };
 
   return <Auth.Provider value={value}>{children}</Auth.Provider>;
-};
-
-// UseAuth - to call the context
-const useAuth = () => {
-  return useContext(Auth);
 };
 
 // Wrapper wateva this is

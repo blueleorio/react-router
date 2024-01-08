@@ -23,7 +23,9 @@ export default function BasicModal({ onClose }) {
   // Function to handle form submission
   const handleLogin = (username) => {
     // Call the signin method to update the authentication state
+
     auth.signin(username, () => {
+      console.log("User has logged in:", auth.user);
       // Close the modal after successful login
       onClose();
     });
