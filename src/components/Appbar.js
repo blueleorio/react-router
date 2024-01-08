@@ -89,8 +89,8 @@ export default function SearchAppBar({ title }) {
           >
             {title}
           </Typography>
-          <Link to="/invoices">Invoices</Link> |{" "}
-          <Link to="/expenses">Expenses</Link> | <Link to="/test">Test</Link>
+          {/* <Link to="/invoices">Invoices</Link> |{" "}
+          <Link to="/expenses">Expenses</Link> | <Link to="/test">Test</Link> */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

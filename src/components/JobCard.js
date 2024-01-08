@@ -72,15 +72,6 @@ const JobCard = ({ job }) => {
           Learn More
         </Button>
       </CardActions>
-      {/* Login Modal */}
-      <BasicModal open={loginModalOpen} onClose={closeLoginModal} />
-
-      {/* Job Detail Modal */}
-      <JobDetailModal
-        open={jobDetailModalOpen}
-        job={job} // Pass job details to the detail modal
-        onClose={closeJobDetailModal}
-      />
     </Card>
   );
 };

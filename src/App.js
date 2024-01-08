@@ -1,11 +1,14 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { useAuth, RequireAuth } from "./auth/AuthContext";
+
 import ExpensesPage from "./pages/ExpensesPage";
 import { InvoicesPage } from "./pages/InvoicesPage";
 import TestPage from "./pages/TestPage";
-import { Layout } from "./layouts/Layout";
 import HomePage from "./pages/HomePage";
-import { useAuth, RequireAuth } from "./auth/AuthContext";
+import { Layout } from "./layouts/Layout";
+import BasicModal from "./components/BasicModal"; // Import your login modal component
+import JobDetailModal from "./components/JobDetailModal";
 
 export default function App() {
   const location = useLocation();
@@ -22,16 +25,17 @@ export default function App() {
         }
       >
         <Route
+          path="/"
           element={
             <RequireAuth>
               <Layout />
             </RequireAuth>
           }
         >
-          <Route path="/" element={<HomePage />} />
-          <Route path="expenses" element={<ExpensesPage />} />
+          <Route index element={<HomePage />} />
+          {/* <Route path="expenses" element={<ExpensesPage />} />
           <Route path="invoices" element={<InvoicesPage />} />
-          <Route path="test" element={<TestPage />} />
+          <Route path="test" element={<TestPage />} /> */}
         </Route>
         <Route
           path="*"
@@ -42,15 +46,15 @@ export default function App() {
           }
         />
       </Routes>
-      {/* {state && auth.user ? (
+      {state && auth.user ? (
         <Routes>
           <Route path="/job/:id" element={<JobDetailModal />}></Route>
         </Routes>
       ) : (
         <Routes>
-          <Route path="/job/:id" element={<LoginModal />}></Route>
+          <Route path="/job/:id" element={<BasicModal />}></Route>
         </Routes>
-      )} */}
+      )}
     </>
   );
 }
