@@ -33,9 +33,6 @@ export default function App() {
           }
         >
           <Route index element={<HomePage />} />
-          {/* <Route path="expenses" element={<ExpensesPage />} />
-          <Route path="invoices" element={<InvoicesPage />} />
-          <Route path="test" element={<TestPage />} /> */}
         </Route>
         <Route
           path="*"
