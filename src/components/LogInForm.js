@@ -1,3 +1,4 @@
+// LogInForm.js
 import React, { useState } from "react";
 import {
   Stack,
@@ -19,11 +20,7 @@ import { FormProvider } from "./form/FormProvider";
 import { FTextField } from "./form/FTextField";
 import { FCheckBox } from "./form/FCheckBox";
 
-import { useAuth, AuthProvider } from "../auth/AuthContext";
-// TODO: Compact syntax later when refactoring code
-// import { FormProvider, FTextField, FCheckBox } from ".index.js";
-
-function LogInForm() {
+function LogInForm({ onLogin }) {
   const defaultValues = {
     email: "belukotu@shibainu.com",
     password: "ThanhDepTrai",
@@ -34,7 +31,6 @@ function LogInForm() {
     .shape({
       email: yup.string().email().required(),
       password: yup.string().required(),
-      remember: yup.boolean(),
     })
     .required();
   const methods = useForm({
@@ -47,20 +43,16 @@ function LogInForm() {
     formState: { errors, isSubmitting },
   } = methods;
   const [showPassword, setShowPassword] = useState(false);
-  const auth = useAuth();
+
   const handleClickShowPassword = () =>
     setShowPassword((showPassword) => !showPassword);
+
   const handleMouseDownPassword = (e) => e.preventDefault();
 
   const onSubmit = (values) => {
+    // Call the onLogin function with the provided email (username)
+    onLogin(values.email);
     console.log(values);
-    // setError("afterSubmit", { message: "Server response Error" });
-  };
-
-  const handleLogin = () => {
-    auth.signin(defaultValues.email, () => {
-      console.log("Success Log IN, wtf it is");
-    });
   };
 
   return (
@@ -74,20 +66,12 @@ function LogInForm() {
           {!!errors.afterSubmit && (
             <Alert severity="error">{errors.afterSubmit.message}</Alert>
           )}
-          <FTextField name="email" label="email address" />
-
+          <FTextField name="email" label="Email address" />
           <FTextField
             name="password"
-            label="password"
+            label="Password"
             type={showPassword ? "text" : "password"}
             fullWidth
-            rules={{
-              required: "Password is required",
-              minLength: {
-                value: 5,
-                message: "Minimum length is 5",
-              },
-            }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -102,14 +86,13 @@ function LogInForm() {
               ),
             }}
           />
-
           <Stack
             direction="row"
             alignItems="center"
             justifyContent="space-between"
             sx={{ my: 2 }}
           >
-            <FCheckBox name="remember" label="remember my ass" />
+            <FCheckBox name="remember" label="Remember me" />
           </Stack>
           <LoadingButton
             fullWidth
@@ -117,7 +100,6 @@ function LogInForm() {
             type="submit"
             variant="contained"
             color="primary"
-            onClick={handleLogin}
             loading={isSubmitting}
           >
             Log In
@@ -129,20 +111,3 @@ function LogInForm() {
 }
 
 export default LogInForm;
-
-// type="email"
-// {...register("email", {
-//   required: "required",
-//   pattern: {
-//     value: /\S+@\S+\.\S+/,
-//     message: "Entered value does not match email format",
-//   },
-// })}
-
-// {...register("password", {
-//   required: "required",
-//   minLength: {
-//     value: 5,
-//     message: "min length is 5",
-//   },
-// })}

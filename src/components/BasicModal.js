@@ -1,3 +1,4 @@
+// BasicModal.js
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -17,10 +18,7 @@ const style = {
 };
 
 export default function BasicModal({ onClose }) {
-  // const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-  const auth = useAuth(); // Access the authentication context
+  const auth = useAuth();
 
   // Function to handle form submission
   const handleLogin = (username) => {
@@ -29,6 +27,8 @@ export default function BasicModal({ onClose }) {
       // Close the modal after successful login
       onClose();
     });
+  };
+
   return (
     <div>
       <Modal
@@ -38,7 +38,8 @@ export default function BasicModal({ onClose }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <LogInForm onLogin={handleLogin}/>
+          {/* Pass the handleLogin function to the LogInForm */}
+          <LogInForm onLogin={handleLogin} />
         </Box>
       </Modal>
     </div>
