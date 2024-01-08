@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import LogInForm from "./LogInForm";
 import { useAuth } from "../auth/AuthContext";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -19,6 +20,8 @@ const style = {
 
 export default function BasicModal({ onClose }) {
   const auth = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Function to handle form submission
   const handleLogin = (username) => {
@@ -28,6 +31,7 @@ export default function BasicModal({ onClose }) {
       console.log("User has logged in:", auth.user);
       // Close the modal after successful login
       onClose();
+      navigate(location.state?.backgroundLocation || "/");
     });
   };
 

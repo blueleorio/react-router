@@ -24,24 +24,18 @@ export default function App() {
             : location
         }
       >
-        <Route
-          path="/"
-          element={
-            <RequireAuth>
-              <Layout />
-            </RequireAuth>
-          }
-        >
+        <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          {/* <Route path="login" element={<Login />} /> */}
+          <Route
+            path="*"
+            element={
+              <main>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
         </Route>
-        <Route
-          path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <p> There is nothing here!</p>
-            </main>
-          }
-        />
       </Routes>
       {state && auth.user ? (
         <Routes>

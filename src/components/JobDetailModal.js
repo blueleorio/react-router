@@ -35,8 +35,6 @@ function JobDetailModal({ open, job, onClose }) {
             sx={{
               border: "none",
               boxShadow: 0,
-              backgroundColor: (theme) => theme.palette.primary.light,
-              color: (theme) => theme.palette.common.white,
             }}
           >
             <CardContent>
