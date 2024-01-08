@@ -9,7 +9,6 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
 import BasicModal from "./BasicModal";
 import { useAuth } from "../auth/AuthContext";
 
@@ -126,7 +125,7 @@ export default function SearchAppBar({ title }) {
           )}
         </Toolbar>
       </AppBar>
-      {/* Need to revisit this logic later, have no idea why chatGPT suggest this */}
+      {/* TODO: Need to revisit this logic later, have no idea why chatGPT suggest this */}
       {isModalOpen && <BasicModal onClose={() => setIsModalOpen(false)} />}
     </Box>
   );
