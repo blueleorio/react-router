@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { useNavigate, useParams } from "react-router-dom";
-import api from "../data/fetchData";
-import SkillsPaper from "./SkillsPaper";
+import Chip from "@mui/material/Chip";
 
 const style = {
   position: "absolute",
@@ -19,27 +17,15 @@ const style = {
   border: "none",
 };
 
-function JobDetailModal() {
-  const { id } = useParams();
-  const [job, setJob] = useState(null);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await api.getJob(id);
-      setJob(data);
-    };
-    fetchData();
-  }, []);
-
+function JobDetailModal({ open, job, onClose }) {
   const handleClose = () => {
-    navigate(-1);
+    onClose();
   };
+
   return (
     <div>
       <Modal
-        open={true}
+        open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -57,7 +43,22 @@ function JobDetailModal() {
               <Typography variant="h5" component="div">
                 {job?.title}
               </Typography>
-              <SkillsPaper skills={job?.skills} />
+
+              <Box>
+                {job.skills && Array.isArray(job.skills)
+                  ? job.skills
+                      .slice(0, 4)
+                      .map((skill) => (
+                        <Chip
+                          key={skill}
+                          label={skill}
+                          color="error"
+                          size="small"
+                          sx={{ margin: "4px" }}
+                        />
+                      ))
+                  : null}
+              </Box>
               <Typography>{job?.description}</Typography>
               <Typography variant="h6" component="div">
                 City: {job?.city}
