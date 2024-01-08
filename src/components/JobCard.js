@@ -1,5 +1,5 @@
 // JobCard.js
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -7,8 +7,33 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/system/Box";
 import Chip from "@mui/material/Chip";
+import BasicModal from "../components/BasicModal"; // Import your login modal component
+import JobDetailModal from "../components/JobDetailModal"; // Import your job detail modal component
+import { useAuth } from "../auth/AuthContext";
 
 const JobCard = ({ job }) => {
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [jobDetailModalOpen, setJobDetailModalOpen] = useState(false);
+
+  const auth = useAuth();
+
+  const handleLearnMore = () => {
+    if (!auth.user) {
+      // User is not logged in, open the login modal
+      setLoginModalOpen(true);
+    } else {
+      // User is logged in, open the job detail modal
+      setJobDetailModalOpen(true);
+    }
+  };
+
+  const closeLoginModal = () => {
+    setLoginModalOpen(false);
+  };
+
+  const closeJobDetailModal = () => {
+    setJobDetailModalOpen(false);
+  };
   return (
     <Card
       sx={{
@@ -47,6 +72,15 @@ const JobCard = ({ job }) => {
           Learn More
         </Button>
       </CardActions>
+      {/* Login Modal */}
+      <BasicModal open={loginModalOpen} onClose={closeLoginModal} />
+
+      {/* Job Detail Modal */}
+      <JobDetailModal
+        open={jobDetailModalOpen}
+        job={job} // Pass job details to the detail modal
+        onClose={closeJobDetailModal}
+      />
     </Card>
   );
 };

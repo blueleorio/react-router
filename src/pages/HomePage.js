@@ -1,27 +1,13 @@
 import React from "react";
-import SearchAppBar from "../components/Appbar";
 import Container from "@mui/material/Container";
 import { Pagination, Grid } from "@mui/material";
-import JobCard from "../components/JobCard"; // Update the import statement
+import JobCard from "../components/JobCard";
 import Box from "@mui/system/Box";
 import { Outlet } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext"; // Import useAuth from AuthContext
 
 export default function HomePage() {
-  const [jobData, setJobData] = React.useState([]);
-
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/jobs");
-        const data = await response.json();
-        setJobData(data);
-      } catch (error) {
-        console.error("Error fetching job data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { jobData } = useAuth(); // Access jobData from AuthContext
 
   const jobsPerPage = 5;
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -33,9 +19,8 @@ export default function HomePage() {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
-  return (
-    // TODO: need to re-organize link route and layout, your 1-page app look sucks ass, man
 
+  return (
     <Container
       maxWidth="lg"
       className="container"

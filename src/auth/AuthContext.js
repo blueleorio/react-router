@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const Auth = createContext(null);
 
@@ -26,6 +26,21 @@ const useAuth = () => {
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [jobData, setJobData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/jobs");
+        const data = await response.json();
+        setJobData(data);
+      } catch (error) {
+        console.error("Error fetching job data:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to run the effect only once
 
   const signin = (newUser, callback) => {
     return fakeAuthProvider.signin(() => {
@@ -41,7 +56,7 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const value = { user, signin, signout };
+  const value = { user, jobData, signin, signout };
 
   return <Auth.Provider value={value}>{children}</Auth.Provider>;
 };
