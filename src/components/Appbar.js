@@ -11,6 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import BasicModal from "./BasicModal";
 import { useAuth } from "../auth/AuthContext";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -58,10 +59,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar({ title }) {
   // State to manage the modal
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-
+  const navigate = useNavigate();
   // Function to handle opening the modal
   const handleOpenModal = () => {
     setIsModalOpen(true);
+    navigate(`/login`);
   };
 
   // Access user information from AuthContext
@@ -133,6 +135,7 @@ export default function SearchAppBar({ title }) {
         <BasicModal
           onClose={() => {
             setIsModalOpen(false);
+            navigate(``);
           }}
         />
       )}

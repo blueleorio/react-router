@@ -21,6 +21,7 @@ export default function BasicModal({ onClose }) {
   const navigate = useNavigate();
   const handleClose = () => {
     onClose();
+    navigate(``);
   };
 
   return (

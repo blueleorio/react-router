@@ -23,6 +23,8 @@ export default function App() {
       >
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="login" element={<HomePage />} />
+
           <Route
             path="*"
             element={
