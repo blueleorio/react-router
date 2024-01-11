@@ -67,6 +67,11 @@ export default function SearchAppBar({ title }) {
   // Access user information from AuthContext
   const auth = useAuth();
 
+  // Log user and modal state
+  // I hae no idea how and why React render stuff , aysnc, awit, wateva dafuk
+  console.log("User:", auth.user);
+  console.log("Is Modal Open:", isModalOpen);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -124,7 +129,13 @@ export default function SearchAppBar({ title }) {
         </Toolbar>
       </AppBar>
       {/* TODO: Need to revisit this logic later, have no idea why chatGPT suggest this */}
-      {isModalOpen && <BasicModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <BasicModal
+          onClose={() => {
+            setIsModalOpen(false);
+          }}
+        />
+      )}
     </Box>
   );
 }

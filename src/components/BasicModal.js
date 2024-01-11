@@ -17,11 +17,13 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function BasicModal({ onClose }) {
   const navigate = useNavigate();
   const handleClose = () => {
+    onClose();
     navigate(-1);
   };
+
   return (
     <div>
       <Modal
@@ -31,8 +33,7 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {/* Pass the handleLogin function to the LogInForm */}
-          <LogInForm callback={() => {}} />
+          <LogInForm callback={() => {}} onClose={onClose} />
         </Box>
       </Modal>
     </div>

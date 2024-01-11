@@ -22,7 +22,7 @@ import { FCheckBox } from "./form/FCheckBox";
 
 import { useAuth } from "../auth/AuthContext";
 
-function LogInForm({ callback }) {
+function LogInForm({ callback, onClose }) {
   const auth = useAuth();
 
   const defaultValues = {
@@ -53,9 +53,15 @@ function LogInForm({ callback }) {
 
   const handleMouseDownPassword = (e) => e.preventDefault();
 
-  const onSubmit = () => {
-    auth.signin(defaultValues.email, callback);
-    console.log("user ", auth.user);
+  const onSubmit = async () => {
+    try {
+      await auth.signin(defaultValues.email, callback);
+      console.log("User has logged in:", auth.user);
+      onClose(); // Close the modal after successful login
+    } catch (error) {
+      console.error("Error during login:", error);
+      // Handle error, e.g., display an error message
+    }
   };
 
   return (
