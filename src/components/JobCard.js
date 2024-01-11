@@ -37,6 +37,7 @@ const JobCard = ({ job }) => {
 
   const closeLoginModal = () => {
     setLoginModalOpen(false);
+    // setJobDetailModalOpen(true);
   };
 
   const closeJobDetailModal = () => {
@@ -95,6 +96,13 @@ const JobCard = ({ job }) => {
         job={job}
         onClose={closeJobDetailModal}
       />
+      {/* TODO: PLEASE CHECK THIS PART TO FIX YOUR ISSUE */}
+      {/* <BasicModal
+        onClose={() => {
+          setLoginModalOpen(false);
+          navigate(``);
+        }}
+      /> */}
     </Card>
   );
 };

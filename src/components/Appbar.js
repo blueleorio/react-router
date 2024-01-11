@@ -11,7 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import BasicModal from "./BasicModal";
 import { useAuth } from "../auth/AuthContext";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -71,8 +71,10 @@ export default function SearchAppBar({ title }) {
 
   // Log user and modal state
   // I hae no idea how and why React render stuff , aysnc, awit, wateva dafuk
+
   console.log("User:", auth.user);
   console.log("Is Modal Open:", isModalOpen);
+  console.log("SOMEHOW, IF I REMOVE THIS, EVERYTHING BREAKS");
 
   return (
     <Box sx={{ flexGrow: 1 }}>
