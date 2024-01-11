@@ -33,7 +33,7 @@ export default function App() {
           />
         </Route>
       </Routes>
-      {/* {state && auth.user ? (
+      {state && auth.user ? (
         <Routes>
           <Route path="/job/:id" element={<JobDetailModal />}></Route>
         </Routes>
@@ -41,7 +41,7 @@ export default function App() {
         <Routes>
           <Route path="/job/:id" element={<BasicModal />}></Route>
         </Routes>
-      )} */}
+      )}
     </>
   );
 }

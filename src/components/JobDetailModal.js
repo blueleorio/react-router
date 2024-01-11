@@ -37,7 +37,7 @@ function JobDetailModal({ open, job, onClose }) {
                 {job?.title}
               </Typography>
               <Box>
-                {job.skills && Array.isArray(job.skills)
+                {job?.skills && Array.isArray(job.skills)
                   ? job.skills
                       .slice(0, 4)
                       .map((skill) => (
