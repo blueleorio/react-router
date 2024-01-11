@@ -31,17 +31,11 @@ function JobDetailModal({ open, job, onClose }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Card
-            sx={{
-              border: "none",
-              boxShadow: 0,
-            }}
-          >
+          <Card>
             <CardContent>
               <Typography variant="h5" component="div">
                 {job?.title}
               </Typography>
-
               <Box>
                 {job.skills && Array.isArray(job.skills)
                   ? job.skills

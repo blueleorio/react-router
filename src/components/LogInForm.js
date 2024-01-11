@@ -20,7 +20,11 @@ import { FormProvider } from "./form/FormProvider";
 import { FTextField } from "./form/FTextField";
 import { FCheckBox } from "./form/FCheckBox";
 
-function LogInForm({ onLogin }) {
+import { useAuth } from "../auth/AuthContext";
+
+function LogInForm({ callback }) {
+  const auth = useAuth();
+
   const defaultValues = {
     email: "belukotu@shibainu.com",
     password: "ThanhDepTrai",
@@ -49,10 +53,9 @@ function LogInForm({ onLogin }) {
 
   const handleMouseDownPassword = (e) => e.preventDefault();
 
-  const onSubmit = (values) => {
-    // Call the onLogin function with the provided email (username)
-    onLogin(values.email);
-    console.log(values);
+  const onSubmit = () => {
+    auth.signin(defaultValues.email, callback);
+    console.log("user ", auth.user);
   };
 
   return (

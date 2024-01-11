@@ -2,9 +2,6 @@ import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useAuth, RequireAuth } from "./auth/AuthContext";
 
-import ExpensesPage from "./pages/ExpensesPage";
-import { InvoicesPage } from "./pages/InvoicesPage";
-import TestPage from "./pages/TestPage";
 import HomePage from "./pages/HomePage";
 import { Layout } from "./layouts/Layout";
 import BasicModal from "./components/BasicModal"; // Import your login modal component
@@ -26,7 +23,6 @@ export default function App() {
       >
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-
           <Route
             path="*"
             element={
@@ -37,7 +33,7 @@ export default function App() {
           />
         </Route>
       </Routes>
-      {state && auth.user ? (
+      {/* {state && auth.user ? (
         <Routes>
           <Route path="/job/:id" element={<JobDetailModal />}></Route>
         </Routes>
@@ -45,7 +41,7 @@ export default function App() {
         <Routes>
           <Route path="/job/:id" element={<BasicModal />}></Route>
         </Routes>
-      )}
+      )} */}
     </>
   );
 }

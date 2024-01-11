@@ -3,7 +3,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import LogInForm from "./LogInForm";
-import { useAuth } from "../auth/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const style = {
@@ -18,34 +17,22 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ onClose }) {
-  const auth = useAuth();
+export default function BasicModal() {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  // Function to handle form submission
-  const handleLogin = (username) => {
-    // Call the signin method to update the authentication state
-
-    auth.signin(username, () => {
-      console.log("User has logged in:", auth.user);
-      // Close the modal after successful login
-      onClose();
-      navigate(location.state?.backgroundLocation || "/");
-    });
+  const handleClose = () => {
+    navigate(-1);
   };
-
   return (
     <div>
       <Modal
         open={true}
-        onClose={onClose}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           {/* Pass the handleLogin function to the LogInForm */}
-          <LogInForm onLogin={handleLogin} />
+          <LogInForm callback={() => {}} />
         </Box>
       </Modal>
     </div>

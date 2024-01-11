@@ -10,6 +10,7 @@ import Chip from "@mui/material/Chip";
 import BasicModal from "../components/BasicModal"; // Import your login modal component
 import JobDetailModal from "../components/JobDetailModal"; // Import your job detail modal component
 import { useAuth } from "../auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const JobCard = ({ job }) => {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -17,13 +18,18 @@ const JobCard = ({ job }) => {
 
   const auth = useAuth();
 
+  // Initialize the navigate function from react-router-dom
+  const navigate = useNavigate();
+
   const handleLearnMore = () => {
+    // Check if the user is not logged in
     if (!auth.user) {
-      // User is not logged in, open the login modal
+      // Open the login modal
       setLoginModalOpen(true);
     } else {
-      // User is logged in, open the job detail modal
-      setJobDetailModalOpen(true);
+      // If the user is logged in, navigate to the job detail page
+      // Append the job ID to the URL
+      navigate(`/job/${job.id}`);
     }
   };
 
@@ -34,6 +40,7 @@ const JobCard = ({ job }) => {
   const closeJobDetailModal = () => {
     setJobDetailModalOpen(false);
   };
+
   return (
     <Card
       sx={{
@@ -68,10 +75,20 @@ const JobCard = ({ job }) => {
         <Typography variant="body2">{job.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="warning" variant="contained">
+        <Button
+          size="small"
+          color="warning"
+          variant="contained"
+          onClick={handleLearnMore}
+        >
           Learn More
         </Button>
       </CardActions>
+      <JobDetailModal
+        open={jobDetailModalOpen}
+        job={job}
+        onClose={closeJobDetailModal}
+      />
     </Card>
   );
 };
