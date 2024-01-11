@@ -41,6 +41,7 @@ const JobCard = ({ job }) => {
 
   const closeJobDetailModal = () => {
     setJobDetailModalOpen(false);
+    navigate(``);
   };
 
   return (
