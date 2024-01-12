@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
 };
 
 const RequireAuth = ({ children }) => {
-  const auth = useAuth();
+  // const auth = useAuth();
   // You can use location if needed
   return children;
 };

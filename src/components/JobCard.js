@@ -12,7 +12,7 @@ import { useAuth } from "../auth/AuthContext";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const JobCard = ({ job }) => {
-  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  // const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [jobDetailModalOpen, setJobDetailModalOpen] = useState(false);
 
   const auth = useAuth();
@@ -21,7 +21,7 @@ const JobCard = ({ job }) => {
 
   const handleLearnMore = () => {
     if (auth.user === null) {
-      setLoginModalOpen(true);
+      // setLoginModalOpen(true);
       // console.log("Learn More => !Auth.User:", auth.user);
     } else {
       navigate(`/job/${job.id}`);
