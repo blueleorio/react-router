@@ -1,5 +1,5 @@
 // JobCard.js
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -7,7 +7,33 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/system/Box";
 import Chip from "@mui/material/Chip";
+import JobDetailModal from "../components/JobDetailModal";
+import { useAuth } from "../auth/AuthContext";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+
 const JobCard = ({ job }) => {
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [jobDetailModalOpen, setJobDetailModalOpen] = useState(false);
+
+  const auth = useAuth();
+  const navigate = useNavigate();
+  let location = useLocation();
+
+  const handleLearnMore = () => {
+    if (auth.user === null) {
+      setLoginModalOpen(true);
+      // console.log("Learn More => !Auth.User:", auth.user);
+    } else {
+      navigate(`/job/${job.id}`);
+      setJobDetailModalOpen(true);
+    }
+  };
+
+  const closeJobDetailModal = () => {
+    setJobDetailModalOpen(false);
+    navigate(``);
+  };
+
   return (
     <Card
       sx={{
@@ -42,10 +68,23 @@ const JobCard = ({ job }) => {
         <Typography variant="body2">{job.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="warning" variant="contained">
+        <Button
+          size="small"
+          color="warning"
+          variant="contained"
+          onClick={handleLearnMore}
+          component={Link}
+          to={`/job/${job.id}`}
+          state={{ backgroundLocation: location }}
+        >
           Learn More
         </Button>
       </CardActions>
+      <JobDetailModal
+        open={jobDetailModalOpen}
+        job={job}
+        onClose={closeJobDetailModal}
+      />
     </Card>
   );
 };
