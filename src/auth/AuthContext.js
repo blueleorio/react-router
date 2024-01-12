@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         // const response = await fetch("http://localhost:4000/jobs");
-        const response = await fetch("/jobs.json");
+        const response = await fetch("/jobs.json"); // Jobs.json is inside Public folder
         const data = await response.json();
         setJobData(data.jobs);
       } catch (error) {

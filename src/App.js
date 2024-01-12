@@ -1,16 +1,18 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { useAuth, RequireAuth } from "./auth/AuthContext";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "./auth/AuthContext";
 
 import HomePage from "./pages/HomePage";
 import { Layout } from "./layouts/Layout";
-import BasicModal from "./components/BasicModal"; // Import your login modal component
+import BasicModal from "./components/BasicModal";
 import JobDetailModal from "./components/JobDetailModal";
 
 export default function App() {
   const location = useLocation();
-  const auth = useAuth(); // Ensure to call useAuth as a function
+  const auth = useAuth();
   const state = location.state;
+  const navigate = useNavigate();
+  // State to manage the modal
 
   return (
     <>
@@ -41,7 +43,16 @@ export default function App() {
         </Routes>
       ) : (
         <Routes>
-          <Route path="/job/:id" element={<BasicModal />}></Route>
+          <Route
+            path="/job/:id"
+            element={
+              <BasicModal
+                onClose={() => {
+                  navigate(-1);
+                }}
+              />
+            }
+          ></Route>
         </Routes>
       )}
     </>

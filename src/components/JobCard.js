@@ -23,13 +23,10 @@ const JobCard = ({ job }) => {
   let location = useLocation();
 
   const handleLearnMore = () => {
-    // Check if the user is not logged in
-    if (!auth.user) {
-      // Open the login modal
+    if (auth.user === null) {
       setLoginModalOpen(true);
+      // console.log("Learn More => !Auth.User:", auth.user);
     } else {
-      // If the user is logged in, navigate to the job detail page
-      // Append the job ID to the URL
       navigate(`/job/${job.id}`);
       setJobDetailModalOpen(true);
     }

@@ -72,7 +72,7 @@ export default function SearchAppBar({ title }) {
   // Log user and modal state
   // I hae no idea how and why React render stuff , aysnc, awit, wateva dafuk
 
-  console.log("User:", auth.user);
+  console.log("Appbar => Auth.User:", auth.user);
   console.log("Is Modal Open:", isModalOpen);
   console.log("SOMEHOW, IF I REMOVE THIS, EVERYTHING BREAKS");
 
@@ -136,6 +136,7 @@ export default function SearchAppBar({ title }) {
       {isModalOpen && (
         <BasicModal
           onClose={() => {
+            console.log("App bar - basicmodal");
             setIsModalOpen(false);
             navigate(``);
           }}
