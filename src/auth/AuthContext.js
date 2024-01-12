@@ -31,9 +31,10 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:4000/jobs");
+        // const response = await fetch("http://localhost:4000/jobs");
+        const response = await fetch("/jobs.json");
         const data = await response.json();
-        setJobData(data);
+        setJobData(data.jobs);
       } catch (error) {
         console.error("Error fetching job data:", error);
       }
