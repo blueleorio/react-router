@@ -49,7 +49,6 @@ export default function App() {
               <BasicModal
                 onClose={() => {
                   navigate(-1);
-                  console.log("app / basicmodal");
                 }}
               />
             }

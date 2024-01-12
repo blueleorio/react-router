@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 import SearchAppBar from "../components/Appbar";
 import Stack from "@mui/material/Stack";

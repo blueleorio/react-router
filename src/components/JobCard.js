@@ -7,8 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/system/Box";
 import Chip from "@mui/material/Chip";
-import BasicModal from "../components/BasicModal"; // Import your login modal component
-import JobDetailModal from "../components/JobDetailModal"; // Import your job detail modal component
+import JobDetailModal from "../components/JobDetailModal";
 import { useAuth } from "../auth/AuthContext";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 
@@ -17,8 +16,6 @@ const JobCard = ({ job }) => {
   const [jobDetailModalOpen, setJobDetailModalOpen] = useState(false);
 
   const auth = useAuth();
-
-  // Initialize the navigate function from react-router-dom
   const navigate = useNavigate();
   let location = useLocation();
 
@@ -30,11 +27,6 @@ const JobCard = ({ job }) => {
       navigate(`/job/${job.id}`);
       setJobDetailModalOpen(true);
     }
-  };
-
-  const closeLoginModal = () => {
-    setLoginModalOpen(false);
-    // setJobDetailModalOpen(true);
   };
 
   const closeJobDetailModal = () => {
@@ -93,13 +85,6 @@ const JobCard = ({ job }) => {
         job={job}
         onClose={closeJobDetailModal}
       />
-      {/* TODO: PLEASE CHECK THIS PART TO FIX YOUR ISSUE */}
-      {/* <BasicModal
-        onClose={() => {
-          setLoginModalOpen(false);
-          navigate(``);
-        }}
-      /> */}
     </Card>
   );
 };
