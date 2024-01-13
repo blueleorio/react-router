@@ -72,9 +72,9 @@ export default function SearchAppBar({ title }) {
   // Log user and modal state
   // I hae no idea how and why React render stuff , aysnc, awit, wateva dafuk
 
-  console.log("Appbar => Auth.User:", auth.user);
-  console.log("Is Modal Open:", isModalOpen);
-  console.log("SOMEHOW, IF I REMOVE THIS, EVERYTHING BREAKS");
+  // console.log("Appbar => Auth.User:", auth.user);
+  // console.log("Is Modal Open:", isModalOpen);
+  // console.log("SOMEHOW, IF I REMOVE THIS, EVERYTHING BREAKS");
 
   return (
     <Box sx={{ flexGrow: 1 }}>
